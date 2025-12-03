@@ -1,0 +1,28 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+footer.footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+footer.footer span {
+    margin: 0;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.card {
+    border-radius: 0.5rem;
+}
+
+@media (max-width: 576px) {
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+}
