@@ -1,28 +1,318 @@
-body {
-    font-family: 'Arial', sans-serif;
+/* ===============================
+   KLE – CYBERPUNK THEME
+   AUTH + APP (LOGIN UYUMLU)
+================================ */
+
+:root {
+    --bg-main: #020409;
+    --bg-panel: rgba(0,0,0,0.7);
+    --neon-cyan: #00fff7;
+    --neon-pink: #ff2bdc;
+    --text-main: #e6ffff;
+    --text-muted: #6b6b6b;
 }
 
-footer.footer {
-    background-color: #343a40;
-    color: #fff;
-    text-align: center;
-    font-size: 0.9rem;
+* {
+    box-sizing: border-box;
 }
 
-footer.footer span {
+html, body {
     margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(180deg, #05080f, #020409);
+    color: var(--text-main);
 }
 
-.table td, .table th {
-    vertical-align: middle;
+/* ===============================
+   AUTH BACKGROUND
+================================ */
+
+.cp-auth-bg {
+    min-height: 100vh;
+    background:
+        linear-gradient(180deg, #05080f, #020409),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0,255,247,0.04),
+            rgba(0,255,247,0.04) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.card {
-    border-radius: 0.5rem;
+.cp-auth-terminal {
+    width: 380px;
+    border: 1px solid var(--neon-cyan);
+    padding: 35px;
+    background: var(--bg-panel);
 }
 
-@media (max-width: 576px) {
-    .table-responsive {
-        font-size: 0.9rem;
+.cp-auth-terminal h1 {
+    margin: 0;
+    font-size: 28px;
+    color: var(--neon-cyan);
+}
+
+.cp-auth-sub {
+    display: block;
+    margin-bottom: 25px;
+    color: var(--neon-pink);
+}
+
+.cp-auth-terminal label {
+    display: block;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.cp-auth-terminal input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 8px;
+}
+
+.cp-auth-btn {
+    margin-top: 25px;
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    padding: 10px;
+}
+
+.cp-auth-footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cp-muted-text {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.cp-neon-link {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+    background: rgba(0, 246, 255, 0.05);
+}
+
+.cp-neon-link:hover {
+    background: var(--neon-cyan);
+    color: #050812;
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+/* ===============================
+   APP LAYOUT (LOGIN SONRASI)
+================================ */
+
+.cp-app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.cp-sidebar {
+    width: 240px;
+    border-right: 1px solid var(--neon-cyan);
+    padding: 30px 20px;
+    background:
+        linear-gradient(180deg, #05080f, #020409),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0,255,247,0.03),
+            rgba(0,255,247,0.03) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+}
+
+.cp-sidebar-logo {
+    font-size: 22px;
+    color: var(--neon-cyan);
+    margin-bottom: 40px;
+}
+
+.cp-sidebar-nav a {
+    display: block;
+    margin-bottom: 12px;
+    padding: 10px;
+    border: 1px solid transparent;
+    color: var(--text-main);
+}
+
+.cp-sidebar-nav a:hover {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+}
+
+.cp-logout-btn {
+    margin-top: 40px;
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    padding: 10px;
+}
+
+.cp-main {
+    flex: 1;
+    padding: 30px;
+}
+
+.cp-header {
+    margin-bottom: 30px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--neon-cyan);
+}
+
+.cp-content {
+    border: 1px solid var(--neon-cyan);
+    padding: 25px;
+    background: rgba(0,0,0,0.4);
+}
+
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+    .cp-sidebar {
+        display: none;
     }
+}
+
+
+/* ===============================
+   CYBERPUNK FORM STYLING
+================================ */
+
+.cp-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border: 1px solid var(--neon-cyan);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.cp-create-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    padding: 15px;
+}
+
+.cp-label {
+    font-size: 12px;
+    color: var(--neon-pink);
+    margin-bottom: 5px;
+}
+
+.cp-link {
+    color: var(--neon-cyan);
+    text-decoration: none;
+}
+
+/* Form controls */
+.cp-control {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input, textarea, select */
+.cp-input,
+.cp-control input,
+.cp-control textarea,
+.cp-control select {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    border-radius: 4px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.cp-input:focus,
+.cp-control input:focus,
+.cp-control textarea:focus,
+.cp-control select:focus {
+    outline: none;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 8px var(--neon-pink);
+}
+
+/* Textarea özel */
+textarea.cp-input {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Select görünümü */
+.cp-control select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 25px;
+}
+
+/* Checkbox ve radio */
+.cp-control input[type="checkbox"],
+.cp-control input[type="radio"] {
+    accent-color: var(--neon-cyan);
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+
+.cp-button,
+.cp-control button,
+.cp-control input[type="submit"] {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: transparent;
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.cp-button:hover,
+.cp-control button:hover,
+.cp-control input[type="submit"]:hover {
+    background: var(--neon-pink);
+    color: #020409;
+    box-shadow: 0 0 15px var(--neon-pink);
+}
+
+/* Show sayfasında read-only görünüm */
+.cp-row .cp-control:not(input):not(textarea):not(select) {
+    border-radius: 4px;
+    background: rgba(0,0,0,0.3);
+    color: var(--text-main);
+    font-family: 'Orbitron', sans-serif;
 }

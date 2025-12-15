@@ -1,27 +1,35 @@
 @extends('layouts.app')
 
-@section('title', 'Ürün Düzenle')
-
 @section('content')
-<div class="card p-4">
-    <h3>Ürünü Düzenle</h3>
-    <form action="{{ route('products.update', $product) }}" method="POST">
+<div class="cp-panel">
+    <h3 class="cp-title">ÜRÜNÜ DÜZENLE</h3>
+
+    <form method="POST" action="{{ route('products.update', $product) }}">
         @csrf
         @method('PUT')
-        <div class="mb-3">
-            <label for="product_name" class="form-label">Ürün Adı</label>
-            <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name', $product->product_name) }}" required>
+
+        <div class="cp-row">
+            <div class="cp-label">ÜRÜN ADI</div>
+            <div class="cp-control">
+                <input type="text" name="product_name" value="{{ $product->product_name }}" class="cp-input">
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="product_price" class="form-label">Fiyat</label>
-            <input type="number" step="0.01" class="form-control" name="product_price" id="product_price" value="{{ old('product_price', $product->product_price) }}" required>
+
+        <div class="cp-row">
+            <div class="cp-label">FİYAT</div>
+            <div class="cp-control">
+                <input type="number" name="product_price" value="{{ $product->product_price }}" class="cp-input">
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Açıklama</label>
-            <textarea class="form-control" name="description" id="description" rows="3" required>{{ old('description', $product->description) }}</textarea>
+
+        <div class="cp-row">
+            <div class="cp-label">AÇIKLAMA</div>
+            <div class="cp-control">
+                <textarea name="description" class="cp-input">{{ $product->description }}</textarea>
+            </div>
         </div>
-        <button class="btn btn-primary">Güncelle</button>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">Geri</a>
+
+        <button class="cp-button">GÜNCELLE</button>
     </form>
 </div>
 @endsection

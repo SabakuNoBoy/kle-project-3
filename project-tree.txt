@@ -1,0 +1,145 @@
+.
+├── .editorconfig
+├── .env
+├── .env.example
+├── .git
+│   ├── HEAD
+│   ├── branches
+│   ├── config
+│   ├── description
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-merge-commit.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── push-to-checkout.sample
+│   │   ├── sendemail-validate.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   └── exclude
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   │       ├── heads
+│   │       │   └── main
+│   │       └── remotes
+│   │           └── origin
+│   │               └── HEAD
+│   ├── objects
+│   │   ├── info
+│   │   └── pack
+│   │       ├── pack-644b57e8a758b75c71e5ce897168e5181826b3f1.idx
+│   │       ├── pack-644b57e8a758b75c71e5ce897168e5181826b3f1.pack
+│   │       └── pack-644b57e8a758b75c71e5ce897168e5181826b3f1.rev
+│   ├── packed-refs
+│   └── refs
+│       ├── heads
+│       │   └── main
+│       ├── remotes
+│       │   └── origin
+│       │       └── HEAD
+│       └── tags
+├── .gitattributes
+├── .gitignore
+├── README.md
+├── app
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   ├── AuthController.php
+│   │   │   ├── Controller.php
+│   │   │   └── ProductController.php
+│   │   └── Requests
+│   │       ├── LoginRequest.php
+│   │       └── RegisterRequest.php
+│   ├── Models
+│   │   ├── Product.php
+│   │   └── User.php
+│   └── Providers
+│       └── AppServiceProvider.php
+├── artisan
+├── bootstrap
+│   ├── app.php
+│   ├── cache
+│   │   ├── .gitignore
+│   │   ├── packages.php
+│   │   └── services.php
+│   └── providers.php
+├── composer.json
+├── composer.lock
+├── config
+│   ├── app.php
+│   ├── auth.php
+│   ├── cache.php
+│   ├── database.php
+│   ├── filesystems.php
+│   ├── logging.php
+│   ├── mail.php
+│   ├── queue.php
+│   ├── services.php
+│   └── session.php
+├── database
+│   ├── .gitignore
+│   ├── factories
+│   │   └── UserFactory.php
+│   ├── migrations
+│   │   ├── 0001_01_01_000000_create_users_table.php
+│   │   ├── 0001_01_01_000001_create_cache_table.php
+│   │   ├── 0001_01_01_000002_create_jobs_table.php
+│   │   └── 2025_12_02_131304_create_products_table.php
+│   └── seeders
+│       └── DatabaseSeeder.php
+├── docker-compose.yml
+├── dockerfile
+├── nginx
+│   └── default.conf
+├── package-lock.json
+├── package.json
+├── phpunit.xml
+├── project-tree.txt
+├── public
+│   ├── .htaccess
+│   ├── css
+│   │   └── app.css
+│   ├── favicon.ico
+│   ├── index.php
+│   └── robots.txt
+├── resources
+│   ├── css
+│   │   └── app.css
+│   ├── js
+│   │   ├── app.js
+│   │   └── bootstrap.js
+│   └── views
+│       ├── auth
+│       │   ├── login.blade.php
+│       │   └── register.blade.php
+│       ├── dashboard.blade.php
+│       ├── layouts
+│       │   └── app.blade.php
+│       ├── products
+│       │   ├── create.blade.php
+│       │   ├── edit.blade.php
+│       │   ├── index.blade.php
+│       │   └── show.blade.php
+│       └── welcome.blade.php
+├── routes
+│   ├── console.php
+│   └── web.php
+├── tests
+│   ├── Feature
+│   │   └── ExampleTest.php
+│   ├── Pest.php
+│   ├── TestCase.php
+│   └── Unit
+│       └── ExampleTest.php
+└── vite.config.js
+
+45 directories, 98 files

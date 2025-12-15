@@ -1,21 +1,34 @@
 @extends('layouts.app')
 
-@section('title', 'Ürün Detayı')
-
 @section('content')
-<div class="card p-4">
-    <h3>{{ $product->product_name }}</h3>
-    <p><strong>Fiyat:</strong> {{ $product->product_price }} ₺</p>
-    <p><strong>Açıklama:</strong> {{ $product->description }}</p>
+<div class="cp-panel">
+    <h3 class="cp-title">ÜRÜN DETAYI</h3>
 
-    <a href="{{ route('products.edit', $product) }}" class="btn btn-warning">Düzenle</a>
+    <div class="cp-row">
+        <div class="cp-label">ÜRÜN ADI</div>
+        <div class="cp-control">{{ $product->product_name }}</div>
+    </div>
 
-    <form action="{{ route('products.destroy', $product) }}" method="POST" class="d-inline">
-        @csrf
-        @method('DELETE')
-        <button class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</button>
-    </form>
+    <div class="cp-row">
+        <div class="cp-label">FİYAT</div>
+        <div class="cp-control">{{ $product->product_price }} ₺</div>
+    </div>
 
-    <a href="{{ route('products.index') }}" class="btn btn-secondary">Geri</a>
+    <div class="cp-row">
+        <div class="cp-label">AÇIKLAMA</div>
+        <div class="cp-control">{{ $product->description }}</div>
+    </div>
+
+    <div class="d-flex gap-3 mt-4">
+        <a href="{{ route('products.edit', $product) }}" class="cp-button" style="width:auto">
+            DÜZENLE
+        </a>
+
+        <form method="POST" action="{{ route('products.destroy', $product) }}">
+            @csrf
+            @method('DELETE')
+            <button class="cp-button" style="width:auto">SİL</button>
+        </form>
+    </div>
 </div>
 @endsection

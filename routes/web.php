@@ -1,31 +1,70 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 
-// Welcome sayfası
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('welcome');
-
-// Auth routes
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Anasayfa (products.index) yönlendirmesi ve kontrol
+/*
+|--------------------------------------------------------------------------
+| Root
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
-    if (auth()->check()) {
+    if (Auth::check()) {
         return redirect()->route('products.index');
-    } else {
-        return redirect()->route('login')->with('error', 'Verileri görmek için giriş yapmalısınız.');
     }
+
+    return redirect()->route('login');
 });
 
-// Product CRUD (sadece giriş yapmış kullanıcılar)
-Route::middleware(['auth'])->group(function () {
-    Route::resource('products', ProductController::class);
+/*
+|--------------------------------------------------------------------------
+| Guest routes (Login & Register)
+|--------------------------------------------------------------------------
+| Giriş yapmış kullanıcı bu sayfalara giremez
+*/
+Route::middleware('guest')->group(function () {
+
+    Route::get('/login', [AuthController::class, 'showLoginForm'])
+        ->name('login');
+
+    Route::post('/login', [AuthController::class, 'login'])
+        ->name('login.post');
+
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])
+        ->name('register');
+
+    Route::post('/register', [AuthController::class, 'register'])
+        ->name('register.post');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Authenticated routes
+|--------------------------------------------------------------------------
+| Sadece giriş yapan kullanıcılar erişebilir
+*/
+Route::middleware('auth')->group(function () {
+
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->name('logout');
+
+    // Product CRUD
+    Route::resource('products', ProductController::class)
+        ->only([
+            'index',
+            'create',
+            'store',
+            'show',
+            'edit',
+            'update',
+            'destroy'
+        ]);
 });

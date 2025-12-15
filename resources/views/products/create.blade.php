@@ -1,26 +1,34 @@
 @extends('layouts.app')
 
-@section('title', 'Ürün Ekle')
-
 @section('content')
-<div class="card p-4">
-    <h3>Yeni Ürün Ekle</h3>
-    <form action="{{ route('products.store') }}" method="POST">
+<div class="cp-panel">
+    <h3 class="cp-title">ÜRÜN EKLE</h3>
+
+    <form method="POST" action="{{ route('products.store') }}">
         @csrf
-        <div class="mb-3">
-            <label for="product_name" class="form-label">Ürün Adı</label>
-            <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name') }}" required>
+
+        <div class="cp-create-row">
+            <div class="cp-label">ÜRÜN ADI</div>
+            <div class="cp-control">
+                <input type="text" name="product_name" class="cp-input">
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="product_price" class="form-label">Fiyat</label>
-            <input type="number" step="0.01" class="form-control" name="product_price" id="product_price" value="{{ old('product_price') }}" required>
+
+        <div class="cp-create-row">
+            <div class="cp-label">FİYAT</div>
+            <div class="cp-control">
+                <input type="number" name="product_price" class="cp-input">
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Açıklama</label>
-            <textarea class="form-control" name="description" id="description" rows="3" required>{{ old('description') }}</textarea>
+
+        <div class="cp-create-row">
+            <div class="cp-label">AÇIKLAMA</div>
+            <div class="cp-control">
+                <textarea name="description" class="cp-input"></textarea>
+            </div>
         </div>
-        <button class="btn btn-primary">Kaydet</button>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">Geri</a>
+
+        <button class="cp-button">ÜRÜNÜ KAYDET</button>
     </form>
 </div>
 @endsection
