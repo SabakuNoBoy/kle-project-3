@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
+use Exception;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        $products = Product::latest()->get();
+        return view('dashboard', compact('products'));
     }
 
     public function create()
@@ -22,9 +23,12 @@ class ProductController extends Controller
     {
         try {
             Product::create($request->validated());
-            return redirect()->route('products.index')
-                ->with('success', 'Ürün eklendi');
-        } catch (\Exception $e) {
+
+            return redirect()
+                ->route('dashboard')
+                ->with('success', 'Ürün başarıyla eklendi');
+
+        } catch (Exception $e) {
             return back()->with('error', 'Ürün eklenemedi');
         }
     }
@@ -43,9 +47,12 @@ class ProductController extends Controller
     {
         try {
             $product->update($request->validated());
-            return redirect()->route('products.show', $product)
+
+            return redirect()
+                ->route('products.show', $product)
                 ->with('success', 'Ürün güncellendi');
-        } catch (\Exception $e) {
+
+        } catch (Exception $e) {
             return back()->with('error', 'Güncelleme başarısız');
         }
     }
@@ -54,9 +61,12 @@ class ProductController extends Controller
     {
         try {
             $product->delete();
-            return redirect()->route('products.index')
+
+            return redirect()
+                ->route('dashboard')
                 ->with('success', 'Ürün silindi');
-        } catch (\Exception $e) {
+
+        } catch (Exception $e) {
             return back()->with('error', 'Silme işlemi başarısız');
         }
     }

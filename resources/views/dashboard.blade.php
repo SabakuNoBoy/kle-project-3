@@ -5,13 +5,15 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
     <h2>Ürünler</h2>
-    <a href="{{ route('products.create') }}" class="btn btn-success mt-2 mt-md-0">Yeni Ürün Ekle</a>
+    <a href="{{ route('products.create') }}" class="cp-neon-link">Yeni Ürün Ekle</a>
 </div>
 
 @if(isset($products) && $products->count())
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+<div class="cp-content">
+    <h2>Ürünler</h2>
+
+    <table class="cp-product-table">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>Ürün Adı</th>
@@ -26,14 +28,14 @@
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->product_name }}</td>
                 <td>{{ $product->product_price }} ₺</td>
-                <td>{{ Str::limit($product->description, 50) }}</td>
-                <td class="d-flex flex-wrap gap-1">
-                    <a href="{{ route('products.show', $product) }}" class="btn btn-info btn-sm">Göster</a>
-                    <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Düzenle</a>
-                    <form action="{{ route('products.destroy', $product) }}" method="POST" class="d-inline">
+                <td>{{ $product->description }}</td>
+                <td>
+                    <a href="{{ route('products.show', $product->id) }}">Göster</a>
+                    <a href="{{ route('products.edit', $product->id) }}">Düzenle</a>
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</button>
+                        <button type="submit">Sil</button>
                     </form>
                 </td>
             </tr>
@@ -41,6 +43,7 @@
         </tbody>
     </table>
 </div>
+
 @else
     <div class="alert alert-info">Henüz ürün eklenmemiş.</div>
 @endif

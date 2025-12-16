@@ -7,12 +7,12 @@ use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
-| Root
+| Root (Standart Davranış)
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
     if (Auth::check()) {
-        return redirect()->route('products.index');
+        return redirect()->route('dashboard');
     }
 
     return redirect()->route('login');
@@ -20,9 +20,9 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Guest routes (Login & Register)
+| Guest Routes (Login & Register)
 |--------------------------------------------------------------------------
-| Giriş yapmış kullanıcı bu sayfalara giremez
+| Giriş yapmış kullanıcı giremez
 */
 Route::middleware('guest')->group(function () {
 
@@ -41,30 +41,19 @@ Route::middleware('guest')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Authenticated routes
+| Authenticated Routes
 |--------------------------------------------------------------------------
-| Sadece giriş yapan kullanıcılar erişebilir
+| Sadece giriş yapan kullanıcılar
 */
 Route::middleware('auth')->group(function () {
 
-    // Dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Dashboard = Ürün Listesi
+    Route::get('/dashboard', [ProductController::class, 'index'])
+        ->name('dashboard');
 
-    // Logout
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
 
     // Product CRUD
-    Route::resource('products', ProductController::class)
-        ->only([
-            'index',
-            'create',
-            'store',
-            'show',
-            'edit',
-            'update',
-            'destroy'
-        ]);
+    Route::resource('products', ProductController::class);
 });

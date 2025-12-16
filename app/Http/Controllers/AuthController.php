@@ -7,11 +7,16 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Exception;
 
 class AuthController extends Controller
 {
     public function showLoginForm()
     {
+        if (session()->has('url.intended')) {
+            session()->flash('error', 'Verileri görmek için giriş yapmalısınız');
+        }
+
         return view('auth.login');
     }
 
@@ -22,45 +27,50 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        try {
-            if (!Auth::attempt($request->validated())) {
-                return back()->withErrors([
-                    'email' => 'Giriş bilgileri hatalı'
-                ]);
-            }
-
-            $request->session()->regenerate();
-            return redirect()->route('products.index');
-
-        } catch (\Exception $e) {
-            return back()->with('error', 'Giriş sırasında hata oluştu');
+        if (!Auth::attempt($request->validated())) {
+            return back()
+                ->withErrors(['auth' => 'Email veya şifre hatalı.'])
+                ->withInput();
         }
+
+        $request->session()->regenerate();
+
+        return redirect()
+            ->intended(route('dashboard'))
+            ->with('success', 'Hoşgeldiniz 👋');
     }
 
     public function register(RegisterRequest $request)
     {
         try {
-            User::create([
-                'name' => $request->name,
-                'email' => $request->email,
+            $user = User::create([
+                'name'     => $request->name,
+                'email'    => $request->email,
                 'password' => Hash::make($request->password),
             ]);
 
-            Auth::attempt($request->only('email', 'password'));
+            Auth::login($user);
 
-            return redirect()->route('products.index');
+            return redirect()
+                ->route('dashboard')
+                ->with('success', 'Kayıt başarılı, hoşgeldiniz 👋');
 
-        } catch (\Exception $e) {
-            return back()->with('error', 'Kayıt sırasında hata oluştu');
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'auth' => 'Kayıt sırasında bir hata oluştu.',
+            ]);
         }
     }
 
     public function logout()
     {
         Auth::logout();
+
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()
+            ->route('login')
+            ->with('success', 'Başarıyla çıkış yaptınız.');
     }
 }

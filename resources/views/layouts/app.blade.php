@@ -5,13 +5,14 @@
     <title>KLE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+ 
 </head>
 <body class="cp-app-bg">
 
 <div class="cp-app-container">
 
     <!-- SIDEBAR -->
-    <aside class="cp-sidebar">
+    <aside class="cp-sidebar" id="cpSidebar">
         <div class="cp-sidebar-logo">KLE</div>
 
         <nav class="cp-sidebar-nav">
@@ -28,7 +29,21 @@
     <!-- MAIN -->
     <main class="cp-main">
         <header class="cp-header">
+            <span class="cp-sidebar-toggle" id="sidebarToggle">&#9776;</span>
             <span class="cp-header-title">SİSTEM :: ONLİNE</span>
+
+            @if(session('success'))
+                <div class="alert alert-success mb-3">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger mb-3">
+                    {{ session('error') }}
+                </div>
+            @endif
+
         </header>
 
         <section class="cp-content">
@@ -37,6 +52,15 @@
     </main>
 
 </div>
+
+<script>
+    const sidebar = document.getElementById('cpSidebar');
+    const toggle = document.getElementById('sidebarToggle');
+
+    toggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+</script>
 
 </body>
 </html>

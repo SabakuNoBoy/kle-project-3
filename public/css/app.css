@@ -107,6 +107,7 @@ html, body {
     color: var(--neon-cyan);
     border: 1px solid var(--neon-cyan);
     background: rgba(0, 246, 255, 0.05);
+    margin-bottom: 10px;
 }
 
 .cp-neon-link:hover {
@@ -185,8 +186,6 @@ html, body {
     background: rgba(0,0,0,0.4);
 }
 
-
-
 /* ===============================
    RESPONSIVE
 ================================ */
@@ -196,7 +195,6 @@ html, body {
         display: none;
     }
 }
-
 
 /* ===============================
    CYBERPUNK FORM STYLING
@@ -315,4 +313,169 @@ textarea.cp-input {
     background: rgba(0,0,0,0.3);
     color: var(--text-main);
     font-family: 'Orbitron', sans-serif;
+}
+
+/* ===============================
+   AUTH RESPONSIVE FIX (320–380px)
+================================ */
+
+@media (max-width: 380px) {
+    .cp-auth-terminal {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .cp-auth-terminal h1 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .cp-auth-terminal label {
+        font-size: 11px;
+    }
+
+    .cp-auth-terminal input,
+    .cp-auth-btn {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .cp-auth-footer {
+        font-size: 11px;
+        margin-top: 15px;
+    }
+}
+
+/* ===============================
+   SIDEBAR TOGGLE
+================================ */
+
+.cp-sidebar-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+    .cp-sidebar {
+        position: fixed;
+        left: -250px;
+        top: 0;
+        height: 100%;
+        width: 250px;
+        background: #1f2937;
+        color: #fff;
+        transition: left 0.3s;
+        z-index: 1000;
+    }
+
+    .cp-sidebar.active {
+        left: 0;
+    }
+
+    .cp-sidebar-toggle {
+        display: block;
+    }
+
+    .cp-main {
+        margin-left: 0 !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    .cp-main {
+        margin-left: 250px;
+    }
+}
+
+/* ===============================
+   PRODUCT TABLE CYBERPUNK STYLE
+================================ */
+
+.cp-product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.cp-product-table th,
+.cp-product-table td {
+    padding: 12px 15px;
+    border: 1px solid var(--neon-cyan);
+    text-align: left;
+    color: var(--text-main);
+}
+
+.cp-product-table th {
+    background: rgba(0,255,247,0.1);
+    color: var(--neon-cyan);
+    font-weight: 600;
+}
+
+.cp-product-table tr:nth-child(even) {
+    background: rgba(0,255,247,0.03);
+}
+
+.cp-product-table a {
+    color: var(--neon-pink);
+    text-decoration: none;
+    margin-right: 8px;
+    transition: 0.3s;
+}
+
+.cp-product-table a:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.cp-product-table button {
+    background: transparent;
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cp-product-table button:hover {
+    background: var(--neon-pink);
+    color: #020409;
+    box-shadow: 0 0 8px var(--neon-pink);
+}
+
+/* Responsive için küçük ekranlarda tablo kaydırılabilir */
+@media (max-width: 768px) {
+    .cp-product-table,
+    .cp-product-table thead,
+    .cp-product-table tbody,
+    .cp-product-table th,
+    .cp-product-table td,
+    .cp-product-table tr {
+        display: block;
+    }
+
+    .cp-product-table tr {
+        margin-bottom: 15px;
+    }
+
+    .cp-product-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .cp-product-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: calc(50% - 30px);
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: var(--neon-cyan);
+    }
 }

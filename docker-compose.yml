@@ -5,6 +5,8 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
+    env_file:
+      - .env
     depends_on:
       - db
 
@@ -23,10 +25,10 @@ services:
     image: mysql:8.1
     container_name: kle-db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: kle
-      MYSQL_USER: kleuser
-      MYSQL_PASSWORD: klepass
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
