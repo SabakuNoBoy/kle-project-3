@@ -4,6 +4,12 @@
 <div class="cp-auth-terminal">
     <h1>KLE</h1>
     <span class="cp-auth-sub">Giriş Ekranı</span>
+    {{-- SESSION ERROR --}}
+    @if(session('error'))
+        <div class="cp-error">
+            <div>{{ session('error') }}</div>
+        </div>
+    @endif
 
     {{-- ERROR --}}
     @if($errors->any())

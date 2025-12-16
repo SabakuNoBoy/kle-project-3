@@ -347,26 +347,28 @@ textarea.cp-input {
 }
 
 /* ===============================
-   SIDEBAR TOGGLE
+   SIDEBAR TOGGLE 
 ================================ */
-
-.cp-sidebar-toggle {
-    display: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-}
 
 @media (max-width: 1024px) {
     .cp-sidebar {
+        display: block; 
         position: fixed;
         left: -250px;
         top: 0;
         height: 100%;
         width: 250px;
-        background: #1f2937;
+        background:
+            linear-gradient(180deg, #05080f, #020409),
+            repeating-linear-gradient(
+                0deg,
+                rgba(0,255,247,0.03),
+                rgba(0,255,247,0.03) 1px,
+                transparent 1px,
+                transparent 3px
+            );
         color: #fff;
-        transition: left 0.3s;
+        transition: left 0.3s ease;
         z-index: 1000;
     }
 
@@ -376,10 +378,27 @@ textarea.cp-input {
 
     .cp-sidebar-toggle {
         display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 0.5rem;
     }
 
+    /* overlay  */
+    .cp-sidebar.active::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 250px;
+        width: calc(100% - 250px);
+        height: 100%;
+        background: rgba(0,0,0,0.3);
+        z-index: 900;
+    }
+
+    /* main içerik sabit kalsın */
     .cp-main {
         margin-left: 0 !important;
+        transition: margin-left 0.3s ease;
     }
 }
 
@@ -388,6 +407,7 @@ textarea.cp-input {
         margin-left: 250px;
     }
 }
+
 
 /* ===============================
    PRODUCT TABLE CYBERPUNK STYLE

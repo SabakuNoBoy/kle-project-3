@@ -8,6 +8,16 @@ use Exception;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!auth()->check()) {
+                return redirect()->route('login')->with('error', 'Lütfen önce giriş yapın');
+            }
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $products = Product::latest()->get();
@@ -23,11 +33,9 @@ class ProductController extends Controller
     {
         try {
             Product::create($request->validated());
-
             return redirect()
                 ->route('dashboard')
                 ->with('success', 'Ürün başarıyla eklendi');
-
         } catch (Exception $e) {
             return back()->with('error', 'Ürün eklenemedi');
         }
@@ -47,11 +55,9 @@ class ProductController extends Controller
     {
         try {
             $product->update($request->validated());
-
             return redirect()
                 ->route('products.show', $product)
                 ->with('success', 'Ürün güncellendi');
-
         } catch (Exception $e) {
             return back()->with('error', 'Güncelleme başarısız');
         }
@@ -61,11 +67,9 @@ class ProductController extends Controller
     {
         try {
             $product->delete();
-
             return redirect()
                 ->route('dashboard')
                 ->with('success', 'Ürün silindi');
-
         } catch (Exception $e) {
             return back()->with('error', 'Silme işlemi başarısız');
         }
